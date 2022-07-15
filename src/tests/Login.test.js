@@ -13,7 +13,7 @@ describe('A página Login', () => {
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
   })
-  
+
   it('deve habilitar o botão Entrar ao receber email e senha válidos', () => {
     renderWithRouter(<App />);
     const emailInput = screen.getByPlaceholderText('exemplo@exemplo.com')
