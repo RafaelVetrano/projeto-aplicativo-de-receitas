@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
@@ -40,5 +40,30 @@ describe('A página Login', () => {
     expect(button).toBeEnabled();    
     userEvent.click(button);
     expect(history.location.pathname).toBe('/foods');
+  })
+
+  it('deve ter o mesmo valor do input do que foi digitado pelo usuário', () => {
+    renderWithRouter(<App />);
+    
+    const emailInput = screen.getByPlaceholderText('exemplo@exemplo.com')
+    userEvent.type(emailInput, 'teste');
+    expect(emailInput.value).toBe('teste');
+
+    const passwordInput = screen.getByPlaceholderText(/digite sua senha/i)
+    userEvent.type(passwordInput, '1234');
+    expect(passwordInput.value).toBe('1234');
+  })
+
+  it('deve desabilitar o botão se', () => {
+    renderWithRouter(<App />);
+    const emailInput = screen.getByPlaceholderText('exemplo@exemplo.com')
+    const passwordInput = screen.getByPlaceholderText(/digite sua senha/i)
+    const button = screen.getByTestId('login-submit-btn');
+
+    userEvent.type(emailInput, 'exemplo@email.com')
+    userEvent.type(passwordInput, '123456')
+    expect(button).toBeEnabled();
+    userEvent.clear(passwordInput);
+    expect(button).toBeDisabled();
   })
 })
