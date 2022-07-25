@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
@@ -23,7 +23,7 @@ describe('A página Login', () => {
     expect(button).toBeInTheDocument();
     expect(button).toBeDisabled();
     userEvent.type(emailInput, 'exemplo@hotmail.com');
-    userEvent.type(passwordInput, '12345678');
+    userEvent.type(passwordInput, '1234567');
     expect(button).toBeEnabled();    
   })
 
@@ -36,7 +36,7 @@ describe('A página Login', () => {
     expect(button).toBeInTheDocument();
     expect(button).toBeDisabled();
     userEvent.type(emailInput, 'exemplo@hotmail.com');
-    userEvent.type(passwordInput, '12345678');
+    userEvent.type(passwordInput, '1234567');
     expect(button).toBeEnabled();    
     userEvent.click(button);
     expect(history.location.pathname).toBe('/foods');
@@ -61,7 +61,7 @@ describe('A página Login', () => {
     const button = screen.getByTestId('login-submit-btn');
 
     userEvent.type(emailInput, 'exemplo@email.com')
-    userEvent.type(passwordInput, '123456')
+    userEvent.type(passwordInput, '1234567')
     expect(button).toBeEnabled();
     userEvent.clear(passwordInput);
     expect(button).toBeDisabled();
